@@ -1,5 +1,5 @@
 import db from "#db/client";
-
+import { createUser } from "#db/queries/users";
 import { createPlaylist } from "#db/queries/playlists";
 import { createPlaylistTrack } from "#db/queries/playlists_tracks";
 import { createTrack } from "#db/queries/tracks";
@@ -11,6 +11,7 @@ console.log("🌱 Database seeded.");
 
 async function seed() {
   for (let i = 1; i <= 20; i++) {
+    const user = await createUser("user" + i, "password");
     await createPlaylist("Playlist " + i, "lorem ipsum playlist description");
     await createTrack("Track " + i, i * 50000);
   }
