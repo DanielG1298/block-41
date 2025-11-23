@@ -12,7 +12,7 @@ console.log("🌱 Database seeded.");
 async function seed() {
   for (let i = 1; i <= 20; i++) {
     const user = await createUser("user" + i, "password");
-    await createPlaylist("Playlist " + i, "lorem ipsum playlist description");
+    await createPlaylist("Playlist " + i, "lorem ipsum playlist description", user.id);
     await createTrack("Track " + i, i * 50000);
   }
   for (let i = 1; i <= 15; i++) {

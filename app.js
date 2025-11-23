@@ -1,9 +1,10 @@
 import express from "express";
 const app = express();
 export default app;
-
 import morgan from "morgan";
+import getUserFromToken from "#middleware/getUserFromToken";
 
+import userRouter from "#api/users";
 import tracksRouter from "#api/tracks";
 import playlistsRouter from "#api/playlists";
 
@@ -11,9 +12,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
+app.use(getUserFromToken);
+
 app.use("/tracks", tracksRouter);
 app.use("/playlists", playlistsRouter);
-
+app.use("/users",userRouter);
 app.use((err, req, res, next) => {
   // A switch statement can be used instead of if statements
   // when multiple cases are handled the same way.
